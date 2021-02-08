@@ -18,14 +18,6 @@ const QuestDetailScreen = ({ route }) => {
         navigation.goBack()
     }
 
-    const onSignOutPress = () => {
-        firebase
-            .auth()
-                .signOut()
-                    .then(() => console.log('User signed out!'));
-        navigation.navigate('Login');
-    }
-
     return (
         <View style={{ flex:1, flexDirection:'column' }}>
             <View style={{ flex:1, backgroundColor:'#FFFFFF' }}>
@@ -41,9 +33,7 @@ const QuestDetailScreen = ({ route }) => {
                             </View>
                         </View>
                         <View style={{ flex:1, flexDirection:'row', justifyContent:"flex-end", backgroundColor:'white' }}>
-                            <TouchableOpacity onPress={onSignOutPress}>
-                                <Text>Sign out</Text>
-                            </TouchableOpacity>
+
                         </View>
                     </View>
             </View>
