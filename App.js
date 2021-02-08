@@ -11,7 +11,8 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import EnrollQuestScreen from './screens/QuestEnrollScreen';
-import QuestScreen from './screens/QuestScreen'
+import QuestScreen from './screens/QuestScreen';
+import QuestDetailScreen from './screens/QuestDetailScreen';
 
 
 const Stack = createStackNavigator();
@@ -59,6 +60,7 @@ const App = () => {
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="Quest" component={QuestScreen} />
             <Stack.Screen name="EnrollQuest" component={EnrollQuestScreen} />
+            <Stack.Screen name="QuestDetail" component={QuestDetailScreen} />
           </>
         ) : (
           <>

@@ -2,14 +2,72 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
+
 import { firebase } from './firebase/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { FlatList } from 'react-native-gesture-handler';
 
 const QuestScreen = () => {
+
+    const [quests, setQuests] = useState([])
 
     const navigation = useNavigation();
 
     const onBackPress = () => {
         navigation.goBack()
+    }
+
+    const questsRef = firebase.firestore().collection('quests')
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const uid = await AsyncStorage.getItem("uid")
+                questsRef
+                    .where("staff", "==", uid)
+                        .onSnapshot(
+                            querySnapshot => {
+                                const questData = []
+                                querySnapshot.forEach(doc => {
+                                    const quests = doc.data()
+                                    quests.id = doc.id
+                                    questData.push(quests)
+                                });
+                                setQuests(questData)
+                            },
+                            error => {
+                                console.log(error)
+                            }
+                        )
+            } catch (error) {
+                alert(error)
+            }
+        })();
+    }, []);
+
+    const renderQuests = ({item}) => {
+        return (
+            <View style={{ width:335, height:80 }}>
+                <TouchableOpacity 
+                    onPress={() => navigation.navigate('QuestDetail', {id: item})}
+                >
+                    <View>
+                        <Text>
+                            {item.questName}
+                        </Text>
+                        <Text>
+                            {item.staff}
+                        </Text>
+                        <Text>
+                            {item.location}
+                        </Text>
+                        <Text>
+                            {item.unit}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
     }
 
     return (
@@ -32,7 +90,19 @@ const QuestScreen = () => {
                     </View>
             </View>
             <View style={{ flex:15, backgroundColor:'#CCBAFF' }}>
-
+                <View style={{ flex:1, backgroundColor:'#9773FF' }}>
+                    <Text>
+                        รายชื่องานจิตอาสาทั้งหมด
+                    </Text>
+                </View>
+                { quests && (
+                    <FlatList
+                        data={quests}
+                        renderItem={renderQuests}
+                        keyExtractor={(item) => item.id}
+                        removeClippedSubviews={true}
+                    />
+                )}
             </View>
         </View>
     )
