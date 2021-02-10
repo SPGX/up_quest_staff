@@ -19,11 +19,13 @@ const EnrollQuestScreen = () => {
     const [startTime, setStartTime] = useState('')
     const [endTime, setEndTime] = useState('')
     const [unit, setUnit] = useState('')
+    const [amountTime, setAmountTime] = useState('')
 
-        //datetimepicker
+        //date time picker
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
+    const [showDate, setShowDate] = useState('');
 
     const onAddPress = async() => {
         try {
@@ -34,6 +36,7 @@ const EnrollQuestScreen = () => {
                 questName : questName,
                 location : location,
                 unit : unit,
+                amountTime : amountTime,
                 createdAt : firebase.firestore.FieldValue.serverTimestamp(),
             };
             questRef
@@ -42,6 +45,7 @@ const EnrollQuestScreen = () => {
                         setQuestName('')
                         setLocation('')
                         setUnit('')
+                        setAmountTime('')
                         Keyboard.dismiss()
                         alert("เพิ่มงานจิตอาสาเรียบร้อย!")
                     }).catch((error) => {
@@ -53,40 +57,42 @@ const EnrollQuestScreen = () => {
 
     }
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate(currentDate);
-      };
+    //date time picker
+    // const onChange = (event, selectedDate) => {
+    //     const currentDate = selectedDate || date;
+    //     setShow(Platform.OS === 'ios');
+    //     setDate(currentDate);
+    //   };
     
-      const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-      };
+    //   const showMode = (currentMode) => {
+    //     setShow(true);
+    //     setMode(currentMode);
+    //   };
     
-      const showDatepicker = () => {
-        showMode('date');
-      };
+    //   const showDatepicker = () => {
+    //     showMode('date');
+    //   };
     
-      const showTimepicker = () => {
-        showMode('time');
-      };
-
+    //   const showTimepicker = () => {
+    //     showMode('time');
+    //   };
+    
+      //sign out
     const onBackPress = () => {
         navigation.goBack()
     }
 
     return (
         <View style={{ flex:1, flexDirection:'column' }}>
-            <View style={{ flex:1, backgroundColor:'red' }}>
+            <View style={{ flex:1.5, backgroundColor:'red' }}>
                 <View style={{ flex:1, flexDirection:'row', justifyContent:'space-between' }}>
                         <View style={{ flex:1, flexDirection:'row', justifyContent:"flex-start", backgroundColor:'white' }}>
                             <TouchableOpacity onPress={onBackPress}>
-                                <Text>Back</Text>
+                                <Text style={{ fontSize:24 }}>Back</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{ flex:2, flexDirection:'row', justifyContent:"center", backgroundColor:'white' }}>
-                            <View>
+                            <View style={{ fontSize:24 }}>
                                 <Text>Quest Enroll</Text>
                             </View>
                         </View>
@@ -121,22 +127,53 @@ const EnrollQuestScreen = () => {
                         underlineColorAndroid="transparent"
                         autoCapitalize="none"
                     />
-                    {/* <View>
-                        <Button onPress={showDatepicker} title="Start Date" />
+                    {/* Amount Time */}
+                    <TextInput 
+                        placeholder='จำนวนชั่วโมง'
+                        value={amountTime}
+                        onChangeText={(text) => setAmountTime(text)}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize="none"
+                    />
+
+                    <View style={{ flex:1, flexDirection:'row' }}>
+
+                        {/* <View style={{ flex:1, flexDirection:'column' }}>
+                            <Text>
+                                Start Time
+                            </Text>
+                            <View>
+                                <Button onPress={showDatepicker} title="Start Date" />
+                            </View>
+                            <View>
+                                <Button onPress={showTimepicker} title="Start Time" />
+                            </View>
+                            {show && (
+                                <DateTimePicker
+                                testID="dateTimePicker"
+                                value={date}
+                                mode={mode}
+                                is24Hour={true}
+                                display="default"
+                                onChange={onChange}
+                                />
+                            )}                           
+                            <Text>
+                                {showDate}
+                            </Text>
+                        </View>
+                        <View style={{ flex:1, flexDirection:'column' }}>
+                            <Text>
+                                End Time
+                            </Text>
+                            <View>
+                                <Button onPress={showDatepicker} title="Start Date" />
+                            </View>
+                            <View>
+                                <Button onPress={showTimepicker} title="Start Time" />
+                            </View>                              
+                        </View> */}
                     </View>
-                    <View>
-                        <Button onPress={showTimepicker} title="Start Time" />
-                    </View>
-                    {show && (
-                        <DateTimePicker
-                        testID="dateTimePicker"
-                        value={date}
-                        mode={mode}
-                        is24Hour={true}
-                        display="default"
-                        onChange={onChange}
-                        />
-                    )} */}
                     <Button title='บันทึกข้อมูล' onPress={onAddPress}/>
                 </View>
             </View>

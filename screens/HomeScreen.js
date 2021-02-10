@@ -14,7 +14,7 @@ const HomeScreen = () => {
 
     return (
         <View style={{ flex:1, flexDirection:'column' }}>
-            <View style={{ flex:1, backgroundColor:'#FFFFFF' }}>
+            <View style={{ flex:1.5, backgroundColor:'#FFFFFF' }}>
                 <View style={{ flex:1, flexDirection:'row', justifyContent:'space-between' }}>
                     <View style={{ flex:1, flexDirection:'row', justifyContent:"flex-start", backgroundColor:'white' }}>
                         <TouchableOpacity>
@@ -27,8 +27,8 @@ const HomeScreen = () => {
                         </View>
                     </View>
                     <View style={{ flex:1, flexDirection:'row', justifyContent:"flex-end", backgroundColor:'white' }}>
-                        <TouchableOpacity onPress={onProfilePress}>
-                            <Text>Profile</Text>
+                        <TouchableOpacity onPress={onProfilePress} >
+                            <Text style={{ fontSize:24 }}>Profile</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

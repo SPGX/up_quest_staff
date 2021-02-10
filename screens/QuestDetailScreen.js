@@ -2,10 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
-import { Updates } from 'expo';
 
 import { firebase } from './firebase/config';
-import auth from 'firebase/auth';
+import auth from 'firebase/auth'; 
 
 const QuestDetailScreen = ({ route }) => {
 
@@ -49,6 +48,9 @@ const QuestDetailScreen = ({ route }) => {
                 </Text>
                 <Text>
                     {questId.unit}
+                </Text>
+                <Text>
+                    {questId.amountTime}
                 </Text>
             </View>
         </View>

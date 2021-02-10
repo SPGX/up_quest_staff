@@ -47,7 +47,7 @@ const QuestScreen = () => {
 
     const renderQuests = ({item}) => {
         return (
-            <View style={{ width:335, height:80 }}>
+            <View style={{ width:335, height:100 }}>
                 <TouchableOpacity 
                     onPress={() => navigation.navigate('QuestDetail', {id: item})}
                 >
@@ -63,6 +63,9 @@ const QuestScreen = () => {
                         </Text>
                         <Text>
                             {item.unit}
+                        </Text>
+                        <Text>
+                            {item.amountTime}
                         </Text>
                     </View>
                 </TouchableOpacity>
