@@ -20,10 +20,8 @@ const EnrollQuestScreen = () => {
     //quest data
     const [questName, setQuestName] = useState('')
     const [location, setLocation] = useState('')
-    const [startTime, setStartTime] = useState('')
-    const [endTime, setEndTime] = useState('')
     const [unit, setUnit] = useState('')
-    const [amountTime, setAmountTime] = useState('')
+    const [description, setDescription] = useState('')
 
     //date time picker 2
     const [isTimeStartPickerVisible, setTimeStartPickerVisibility] = useState(false);
@@ -34,32 +32,56 @@ const EnrollQuestScreen = () => {
     const [timeStart, setTimeStart] = useState('');
     const [timeEnd, setTimeEnd] = useState('');
     const [timePeriodStart, setTimePeriodStart] = useState('');
-    const [timePeriodEnd, setTimePeriodEnd] = useState('');   
+    const [timePeriodEnd, setTimePeriodEnd] = useState(''); 
 
     const onAddPress = async() => {
         try {
-            const uid = await AsyncStorage.getItem("uid")
-            console.log(uid)
-            const data = {
-                staff : uid,
-                questName : questName,
-                location : location,
-                unit : unit,
-                amountTime : amountTime,
-                createdAt : firebase.firestore.FieldValue.serverTimestamp(),
-            };
-            questRef
-                .add(data)
-                    .then(_doc => {
-                        setQuestName('')
-                        setLocation('')
-                        setUnit('')
-                        setAmountTime('')
-                        Keyboard.dismiss()
-                        alert("เพิ่มงานจิตอาสาเรียบร้อย!")
-                    }).catch((error) => {
-                        alert(error)
-                    });          
+            var timeStartCheck = moment(timePeriodStart)
+            var timeEndCheck = moment(timePeriodEnd)
+            var dateStartCheck = moment(timeStart)
+            var dateEndCheck = moment(timeEnd)
+            if ( parseInt(timeEndCheck.diff(timeStartCheck)) > 0 && 
+                parseInt(dateEndCheck.diff(dateStartCheck)) >= 0 &&
+                questName != '' && 
+                location != '' && 
+                unit != ''  &&
+                description != '' )
+            {
+                    const uid = await AsyncStorage.getItem("uid")
+                    console.log(uid)
+                    const data = {
+                        staff : uid,
+                        questName : questName,
+                        location : location,
+                        unit : unit,
+                        description : description,
+                        dateStart : moment(timeStart).format('ddd, MMM D YYYY'),
+                        dateEnd : moment(timeEnd).format('ddd, MMM D YYYY'),
+                        timeStart : moment(timePeriodStart).format('h:mm a'),
+                        timeEnd : moment(timePeriodEnd).format('h:mm a'),
+                        amountTime : moment(timePeriodEnd.diff(timePeriodStart, 'hours')) * ((moment(timeEnd.diff(timeStart, 'days')))+1),
+                        createdAt : firebase.firestore.FieldValue.serverTimestamp(),
+                    };
+                    questRef
+                        .add(data)
+                            .then(_doc => {
+                                setQuestName('')
+                                setLocation('')
+                                setUnit('')
+                                setDescription('')
+                                setTimeStart('')
+                                setTimeEnd('')
+                                setTimePeriodStart('')
+                                setTimePeriodEnd('')
+                                Keyboard.dismiss()
+                                alert("เพิ่มงานจิตอาสาเรียบร้อย!")
+                            }).catch((error) => {
+                                alert(error)
+                            }); 
+            }else{
+                alert('โปรดกรอกข้อมูลให้ครบทุกช่อง')
+            }
+         
         } catch (error) {
             alert(error)
         }
@@ -69,13 +91,11 @@ const EnrollQuestScreen = () => {
     const showTimeStartPicker = () => {
         setTimeStartPickerVisibility(true);
     };
-    
     const hideTimeStartPicker = () => {
         setTimeStartPickerVisibility(false);
     };
-    
     const handleConfirmTimeStart = (date) => {
-        setTimeStart(moment(date).add(543, 'year').format('ddd, MMM D YYYY'));
+        setTimeStart(moment(date).add(543, 'year'));
         hideTimeStartPicker();
     };
 
@@ -83,13 +103,11 @@ const EnrollQuestScreen = () => {
     const showTimeEndPicker = () => {
         setTimeEndPickerVisibility(true);
     };
-    
     const hideTimeEndPicker = () => {
         setTimeEndPickerVisibility(false);
     };
-    
     const handleConfirmTimeEnd = (date) => {
-        setTimeEnd(moment(date).add(543, 'year').format('ddd, MMM D YYYY'));
+        setTimeEnd(moment(date).add(543, 'year'));
         hideTimeEndPicker();
     };
 
@@ -97,13 +115,11 @@ const EnrollQuestScreen = () => {
     const showTimePeriodStartPicker = () => {
         setTimePeriodStartPickerVisibility(true);
     };
-    
     const hideTimePeriodStartPicker = () => {
         setTimePeriodStartPickerVisibility(false);
     };
-    
     const handleConfirmTimePeriodStart = (date) => {
-        setTimePeriodStart(moment(date).format('h:mm a'));
+        setTimePeriodStart(moment(date));
         hideTimePeriodStartPicker();
     };
 
@@ -111,13 +127,11 @@ const EnrollQuestScreen = () => {
     const showTimePeriodEndPicker = () => {
         setTimePeriodEndPickerVisibility(true);
     };
-    
     const hideTimePeriodEndPicker = () => {
         setTimePeriodEndPickerVisibility(false);
     };
-    
     const handleConfirmTimePeriodEnd = (date) => {
-        setTimePeriodEnd(moment(date).format('h:mm a'));
+        setTimePeriodEnd(moment(date));
         hideTimePeriodEndPicker();
     };
 
@@ -173,9 +187,9 @@ const EnrollQuestScreen = () => {
                         autoCapitalize="none"
                     />
                     <TextInput 
-                        placeholder='จำนวนชั่วโมง'
-                        value={amountTime}
-                        onChangeText={(text) => setAmountTime(text)}
+                        placeholder='ระบุรายละเอียดของงาน สถาที่ของงานแบบเจาะจง'
+                        value={description}
+                        onChangeText={(text) => setDescription(text)}
                         underlineColorAndroid="transparent"
                         autoCapitalize="none"
                     />
@@ -189,7 +203,10 @@ const EnrollQuestScreen = () => {
                                     onCancel={hideTimeStartPicker}
                                 />
                                 <Text>
-                                    {timeStart}
+                                    { timeStart != ''
+                                    ? <Text>{moment(timeStart).format('ddd, MMM D YYYY')}</Text>
+                                    : <Text></Text>
+                                    }
                                 </Text>
                             </View>
                             <View style={{ flex:1, flexDirection:'column' }}>
@@ -201,8 +218,11 @@ const EnrollQuestScreen = () => {
                                     onCancel={hideTimeEndPicker}
                                 />
                                 <Text>
-                                    {timeEnd}
-                                </Text>  
+                                    { timeEnd != ''
+                                    ? <Text>{moment(timeEnd).format('ddd, MMM D YYYY')}</Text>
+                                    : <Text></Text>
+                                    }
+                                </Text>
                             </View>
                         </View>
                         <View style={{ flexDirection:'row' }}>
@@ -215,8 +235,11 @@ const EnrollQuestScreen = () => {
                                     onCancel={hideTimePeriodStartPicker}
                                 />
                                 <Text>
-                                    {timePeriodStart}
-                                </Text>        
+                                    { timePeriodStart != ''
+                                    ? <Text>{moment(timePeriodStart).format('h:mm a')}</Text>
+                                    : <Text></Text>
+                                    }
+                                </Text>      
                             </View>
                             <View style={{ flex:1, flexDirection:'column' }}>
                                 <Button title="เวลาเลิกงาน" onPress={showTimePeriodEndPicker} />
@@ -227,7 +250,10 @@ const EnrollQuestScreen = () => {
                                     onCancel={hideTimePeriodEndPicker}
                                 />
                                 <Text>
-                                    {timePeriodEnd}
+                                    { timePeriodEnd != ''
+                                    ? <Text>{moment(timePeriodEnd).format('h:mm a')}</Text>
+                                    : <Text></Text>
+                                    }
                                 </Text>
                             </View>                            
                         </View>
