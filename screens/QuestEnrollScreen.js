@@ -2,10 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View, TouchableOpacity, TextInput, Platform, Keyboard, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
+
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { firebase } from './firebase/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import moment from 'moment';
 
 const EnrollQuestScreen = () => {
 
@@ -13,7 +17,7 @@ const EnrollQuestScreen = () => {
 
     const questRef = firebase.firestore().collection('quests')
 
-        //quest data
+    //quest data
     const [questName, setQuestName] = useState('')
     const [location, setLocation] = useState('')
     const [startTime, setStartTime] = useState('')
@@ -21,11 +25,16 @@ const EnrollQuestScreen = () => {
     const [unit, setUnit] = useState('')
     const [amountTime, setAmountTime] = useState('')
 
-        //date time picker
-    const [date, setDate] = useState(new Date(1598051730000));
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
-    const [showDate, setShowDate] = useState('');
+    //date time picker 2
+    const [isTimeStartPickerVisible, setTimeStartPickerVisibility] = useState(false);
+    const [isTimeEndPickerVisible, setTimeEndPickerVisibility] = useState(false);
+    const [isTimePeriodStartPickerVisible, setTimePeriodStartPickerVisibility] = useState(false);
+    const [isTimePeriodEndPickerVisible, setTimePeriodEndPickerVisibility] = useState(false);
+
+    const [timeStart, setTimeStart] = useState('');
+    const [timeEnd, setTimeEnd] = useState('');
+    const [timePeriodStart, setTimePeriodStart] = useState('');
+    const [timePeriodEnd, setTimePeriodEnd] = useState('');   
 
     const onAddPress = async() => {
         try {
@@ -54,29 +63,64 @@ const EnrollQuestScreen = () => {
         } catch (error) {
             alert(error)
         }
-
     }
+    
+    //date time picker 2 time start
+    const showTimeStartPicker = () => {
+        setTimeStartPickerVisibility(true);
+    };
+    
+    const hideTimeStartPicker = () => {
+        setTimeStartPickerVisibility(false);
+    };
+    
+    const handleConfirmTimeStart = (date) => {
+        setTimeStart(moment(date).add(543, 'year').format('ddd, MMM D YYYY'));
+        hideTimeStartPicker();
+    };
 
-    //date time picker
-    // const onChange = (event, selectedDate) => {
-    //     const currentDate = selectedDate || date;
-    //     setShow(Platform.OS === 'ios');
-    //     setDate(currentDate);
-    //   };
+    //date time picker 2 time end
+    const showTimeEndPicker = () => {
+        setTimeEndPickerVisibility(true);
+    };
     
-    //   const showMode = (currentMode) => {
-    //     setShow(true);
-    //     setMode(currentMode);
-    //   };
+    const hideTimeEndPicker = () => {
+        setTimeEndPickerVisibility(false);
+    };
     
-    //   const showDatepicker = () => {
-    //     showMode('date');
-    //   };
+    const handleConfirmTimeEnd = (date) => {
+        setTimeEnd(moment(date).add(543, 'year').format('ddd, MMM D YYYY'));
+        hideTimeEndPicker();
+    };
+
+    //date time picker 2 time period start
+    const showTimePeriodStartPicker = () => {
+        setTimePeriodStartPickerVisibility(true);
+    };
     
-    //   const showTimepicker = () => {
-    //     showMode('time');
-    //   };
+    const hideTimePeriodStartPicker = () => {
+        setTimePeriodStartPickerVisibility(false);
+    };
     
+    const handleConfirmTimePeriodStart = (date) => {
+        setTimePeriodStart(moment(date).format('h:mm a'));
+        hideTimePeriodStartPicker();
+    };
+
+    //date time picker 2 time period end
+    const showTimePeriodEndPicker = () => {
+        setTimePeriodEndPickerVisibility(true);
+    };
+    
+    const hideTimePeriodEndPicker = () => {
+        setTimePeriodEndPickerVisibility(false);
+    };
+    
+    const handleConfirmTimePeriodEnd = (date) => {
+        setTimePeriodEnd(moment(date).format('h:mm a'));
+        hideTimePeriodEndPicker();
+    };
+
       //sign out
     const onBackPress = () => {
         navigation.goBack()
@@ -106,6 +150,7 @@ const EnrollQuestScreen = () => {
 
                 </View>
                 <View style={{ flex:10 }}>
+                    <View style={{ flex:1, flexDirection:'column' }}>
                     <TextInput 
                         placeholder='ชื่องาน'
                         value={questName}
@@ -127,7 +172,6 @@ const EnrollQuestScreen = () => {
                         underlineColorAndroid="transparent"
                         autoCapitalize="none"
                     />
-                    {/* Amount Time */}
                     <TextInput 
                         placeholder='จำนวนชั่วโมง'
                         value={amountTime}
@@ -135,44 +179,58 @@ const EnrollQuestScreen = () => {
                         underlineColorAndroid="transparent"
                         autoCapitalize="none"
                     />
-
-                    <View style={{ flex:1, flexDirection:'row' }}>
-
-                        {/* <View style={{ flex:1, flexDirection:'column' }}>
-                            <Text>
-                                Start Time
-                            </Text>
-                            <View>
-                                <Button onPress={showDatepicker} title="Start Date" />
-                            </View>
-                            <View>
-                                <Button onPress={showTimepicker} title="Start Time" />
-                            </View>
-                            {show && (
-                                <DateTimePicker
-                                testID="dateTimePicker"
-                                value={date}
-                                mode={mode}
-                                is24Hour={true}
-                                display="default"
-                                onChange={onChange}
+                        <View style={{ flexDirection:'row' }}>
+                            <View style={{ flex:1, flexDirection:'column' }}>
+                                <Button title="เลือกวันเริ่มงาน" onPress={showTimeStartPicker} />
+                                <DateTimePickerModal
+                                    isVisible={isTimeStartPickerVisible}
+                                    mode="date"
+                                    onConfirm={handleConfirmTimeStart}
+                                    onCancel={hideTimeStartPicker}
                                 />
-                            )}                           
-                            <Text>
-                                {showDate}
-                            </Text>
-                        </View>
-                        <View style={{ flex:1, flexDirection:'column' }}>
-                            <Text>
-                                End Time
-                            </Text>
-                            <View>
-                                <Button onPress={showDatepicker} title="Start Date" />
+                                <Text>
+                                    {timeStart}
+                                </Text>
                             </View>
-                            <View>
-                                <Button onPress={showTimepicker} title="Start Time" />
-                            </View>                              
-                        </View> */}
+                            <View style={{ flex:1, flexDirection:'column' }}>
+                                <Button title="เลือกวันจบงาน" onPress={showTimeEndPicker} />
+                                <DateTimePickerModal
+                                    isVisible={isTimeEndPickerVisible}
+                                    mode="date"
+                                    onConfirm={handleConfirmTimeEnd}
+                                    onCancel={hideTimeEndPicker}
+                                />
+                                <Text>
+                                    {timeEnd}
+                                </Text>  
+                            </View>
+                        </View>
+                        <View style={{ flexDirection:'row' }}>
+                            <View style={{ flex:1, flexDirection:'column' }}>
+                                <Button title="เวลาเริ่มงาน" onPress={showTimePeriodStartPicker} />
+                                <DateTimePickerModal
+                                    isVisible={isTimePeriodStartPickerVisible}
+                                    mode="time"
+                                    onConfirm={handleConfirmTimePeriodStart}
+                                    onCancel={hideTimePeriodStartPicker}
+                                />
+                                <Text>
+                                    {timePeriodStart}
+                                </Text>        
+                            </View>
+                            <View style={{ flex:1, flexDirection:'column' }}>
+                                <Button title="เวลาเลิกงาน" onPress={showTimePeriodEndPicker} />
+                                <DateTimePickerModal
+                                    isVisible={isTimePeriodEndPickerVisible}
+                                    mode="time"
+                                    onConfirm={handleConfirmTimePeriodEnd}
+                                    onCancel={hideTimePeriodEndPicker}
+                                />
+                                <Text>
+                                    {timePeriodEnd}
+                                </Text>
+                            </View>                            
+                        </View>
                     </View>
                     <Button title='บันทึกข้อมูล' onPress={onAddPress}/>
                 </View>

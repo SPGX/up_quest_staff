@@ -9,30 +9,6 @@ const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    // const onLoginPress = () => {
-    //     const uid = response.user.uid
-    //     const usersRef = firebase.firestore().collection('staffs')
-    //     usersRef
-    //         .doc(uid)
-    //         .get()
-    //         .then(firestoreDocument => {
-    //             if (!firestoreDocument.exists) {
-    //                 alert("User does not exist anymore.")
-    //                 navigation.navigate('Login')
-    //                 return;
-    //             }else{
-    //                 firebase
-    //                     .auth()
-    //                         .signInWithEmailAndPassword(email, password)
-    //                 const staff = firestoreDocument.data()
-    //                 navigation.navigate('Home', {staff: staff})                            
-    //             }
-    //         })
-    //         .catch(error => {
-    //             alert(error)
-    //         });
-    // }
-
     const onLoginPress = () => {
         firebase
             .auth()
@@ -46,12 +22,8 @@ const LoginScreen = ({ navigation }) => {
                     .doc(uid)
                     .get()
                     .then(firestoreDocument => {
-                        if (!firestoreDocument.exists) {
-                            alert("User does not exist anymore.")
-                            return;
-                        }
                         const user = firestoreDocument.data()
-                        navigation.navigate('HomeScreen', {user: user})
+                        navigation.navigate('Home', {user: user})
                     })
                     .catch(error => {
                         alert(error)
@@ -81,7 +53,7 @@ const LoginScreen = ({ navigation }) => {
                     UP Quest For Staff
                 </Text>
                 <TextInput
-                    style={{ textAlign: 'center', backgroundColor:'white' }}
+                    style={{ textAlign: 'center', backgroundColor:'white', marginTop:150 }}
                     placeholder='E-mail'
                     placeholderTextColor="#aaaaaa"
                     onChangeText={(text) => setEmail(text)}
