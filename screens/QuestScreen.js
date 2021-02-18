@@ -47,25 +47,34 @@ const QuestScreen = () => {
 
     const renderQuests = ({item}) => {
         return (
-            <View style={{ width:335, height:100 }}>
+            <View style={{ width:335, height:170 }}>
                 <TouchableOpacity 
                     onPress={() => navigation.navigate('QuestDetail', {id: item})}
                 >
                     <View>
                         <Text>
-                            {item.questName}
+                            ชื่องาน {item.questName}
                         </Text>
                         <Text>
-                            {item.staff}
+                            สถานที่ {item.location}
                         </Text>
                         <Text>
-                            {item.location}
+                            จำนวนที่รับ {item.unit}
                         </Text>
                         <Text>
-                            {item.unit}
+                            วันเรื่มงาน {item.dateStart}
                         </Text>
                         <Text>
-                            {item.amountTime}
+                            วันสิ้นสุดงาน {item.dateEnd}
+                        </Text>
+                        <Text>
+                            เวลาเรื่มงาน {item.timeStart}
+                        </Text>
+                        <Text>
+                            เวลาเสร็จสิ้นงาน {item.timeEnd}
+                        </Text>
+                        <Text>
+                            จำนวนชั่วโมง {item.amountTime}
                         </Text>
                     </View>
                 </TouchableOpacity>
@@ -93,7 +102,7 @@ const QuestScreen = () => {
                     </View>
             </View>
             <View style={{ flex:15, backgroundColor:'#CCBAFF' }}>
-                <View style={{ flex:1, backgroundColor:'#9773FF' }}>
+                <View style={{ backgroundColor:'#9773FF' }}>
                     <Text>
                         รายชื่องานจิตอาสาทั้งหมด
                     </Text>

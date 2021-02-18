@@ -38,19 +38,28 @@ const QuestDetailScreen = ({ route }) => {
             </View>
             <View style={{ flex:15, backgroundColor:'#CCBAFF' }}>
                 <Text>
-                    {questId.questName}
+                    ชื่องาน {questId.questName}
                 </Text>
                 <Text>
-                    {questId.location}
+                    สถานที่ {questId.location}
                 </Text>
                 <Text>
-                    {questId.staff}
+                    จำนวนที่รับ {questId.unit}
                 </Text>
                 <Text>
-                    {questId.unit}
+                    วันเริ่มงาน {questId.dateStart}
                 </Text>
                 <Text>
-                    {questId.amountTime}
+                    วันสิ้นสุดงาน {questId.dateEnd}
+                </Text>
+                <Text>
+                    เวลาเริ่มงาน {questId.timeStart}
+                </Text>
+                <Text>
+                    เวลาเสร็จสิ้นงาน {questId.timeEnd}
+                </Text>
+                <Text>
+                    จำนวนชั่วโมง {questId.amountTime}
                 </Text>
             </View>
         </View>
