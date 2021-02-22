@@ -4,7 +4,6 @@ import { Button, StyleSheet, Text, View, TouchableOpacity, TextInput, Platform, 
 import { useNavigation } from '@react-navigation/native'
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import DateTimePicker from '@react-native-community/datetimepicker';
 import {Picker} from '@react-native-picker/picker';
 
 import { firebase } from './firebase/config';
@@ -23,6 +22,7 @@ const EnrollQuestScreen = () => {
     const [location, setLocation] = useState('เลือกสถานที่')
     const [unit, setUnit] = useState('')
     const [description, setDescription] = useState('')
+    const [unitEnroll, setUnitEnroll] = useState(0)
 
     //date time picker 2
     const [isTimeStartPickerVisible, setTimeStartPickerVisibility] = useState(false);
@@ -45,16 +45,18 @@ const EnrollQuestScreen = () => {
                 parseInt(dateEndCheck.diff(dateStartCheck)) >= 0 &&
                 questName != '' && 
                 location != '' && 
-                unit != ''  &&
+                unit != '' &&
                 description != '' )
             {
                     const uid = await AsyncStorage.getItem("uid")
                     console.log(uid)
+                    console.log(unit)
                     const data = {
                         staff : uid,
                         questName : questName,
                         location : location,
-                        unit : unit,
+                        unit : Number.parseInt(unit),
+                        unitEnroll : unitEnroll,
                         description : description,
                         dateStart : moment(timeStart).format('ddd, MMM D YYYY'),
                         dateEnd : moment(timeEnd).format('ddd, MMM D YYYY'),
@@ -63,6 +65,7 @@ const EnrollQuestScreen = () => {
                         amountTime : moment(timePeriodEnd.diff(timePeriodStart, 'hours')) * ((moment(timeEnd.diff(timeStart, 'days')))+1),
                         createdAt : firebase.firestore.FieldValue.serverTimestamp(),
                     };
+                    console.log(data)
                     questRef
                         .add(data)
                             .then(_doc => {
@@ -212,13 +215,12 @@ const EnrollQuestScreen = () => {
                             <Picker.Item label="พระพุทธภุชคารักษ์" value="พระพุทธภุชคารักษ์" />
                         </Picker>
                     </View>
-                    
                     <TextInput 
                         placeholder='จำนวนนิสิตที่เปิดรับ'
                         value={unit}
                         onChangeText={(text) => setUnit(text)}
                         underlineColorAndroid="transparent"
-                        autoCapitalize="none"
+                        keyboardType={'number-pad'}
                     />
                     <TextInput 
                         placeholder='ระบุรายละเอียดของงาน สถาที่ของงานแบบเจาะจง'
