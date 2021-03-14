@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, StyleSheet, Text, View, TouchableOpacity, TextInput, Platform, Keyboard, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 
@@ -16,6 +16,17 @@ const EnrollQuestScreen = () => {
     const navigation = useNavigation();
 
     const questRef = firebase.firestore().collection('quests')
+    const staffRef = firebase.firestore().collection('staffs')
+
+    //staff data
+    // const [staffData, setStaffData] = useState({
+    //     department:'',
+    //     email:'',
+    //     firstName:'',
+    //     lastName:'',
+    //     phoneNumber:'',
+    //     staffNumber:'',
+    // })
 
     //quest data
     const [questName, setQuestName] = useState('')
@@ -37,6 +48,14 @@ const EnrollQuestScreen = () => {
 
     const onAddPress = async() => {
         try {
+            const uid = await AsyncStorage.getItem("uid")
+            // staffRef
+            //     .doc(uid)
+            //         .get()
+            //             .then((doc) => {
+            //                 setStaffData(doc.data)
+            //                 console.log(staffData)
+            //             })
             var timeStartCheck = moment(timePeriodStart)
             var timeEndCheck = moment(timePeriodEnd)
             var dateStartCheck = moment(timeStart)
@@ -48,13 +67,18 @@ const EnrollQuestScreen = () => {
                 unit != '' &&
                 description != '' )
             {
-                    const uid = await AsyncStorage.getItem("uid")
                     console.log(uid)
                     console.log(unit)
                     const data = {
                         staff : uid,
-                        questName : questName,
-                        location : location,
+                        // staffDepartment : staffRef.department,
+                        // staffEmail : staffRef.email,
+                        // staffFirstName : staffRef.firstName,
+                        // staffLastName : staffRef.lastName,
+                        // staffPhoneNumber : staffRef.phoneNumber,
+                        // staffNumber : staffRef.staffNumber,
+                        // questName : questName,
+                        // location : location,
                         unit : Number.parseInt(unit),
                         unitEnroll : unitEnroll,
                         description : description,
@@ -83,7 +107,7 @@ const EnrollQuestScreen = () => {
                                 alert(error)
                             }); 
             }else{
-                alert('โปรดกรอกข้อมูลให้ครบทุกช่อง')
+                alert('โปรดกรอกข้อมูลให้ถูกต้อง')
             }
          
         } catch (error) {
