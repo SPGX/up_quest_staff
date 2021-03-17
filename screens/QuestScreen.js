@@ -25,57 +25,65 @@ const QuestScreen = () => {
                 const uid = await AsyncStorage.getItem("uid")
                 questsRef
                     .where("staff", "==", uid)
-                        .onSnapshot(
-                            querySnapshot => {
-                                const questData = []
-                                querySnapshot.forEach(doc => {
-                                    const quests = doc.data()
-                                    quests.id = doc.id
-                                    questData.push(quests)
-                                });
-                                setQuests(questData)
-                            },
-                            error => {
-                                console.log(error)
-                            }
-                        )
+                    .onSnapshot(
+                        querySnapshot => {
+                            const questData = []
+                            querySnapshot.forEach(doc => {
+                                const quests = doc.data()
+                                quests.id = doc.id
+                                questData.push(quests)
+                            });
+                            setQuests(questData)
+                        },
+                        error => {
+                            console.log(error)
+                        }
+                    )
             } catch (error) {
                 alert(error)
             }
         })();
     }, []);
 
-    const renderQuests = ({item}) => {
+    const renderQuests = ({ item }) => {
         return (
-            <View style={{ width:335, height:170 }}>
-                <TouchableOpacity 
-                    onPress={() => navigation.navigate('QuestDetail', {id: item})}
+            <View style={{ width: 335, height: 130 }}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('QuestDetail', { id: item })}
                 >
-                    <View>
-                        <Text>
-                            ชื่องาน {item.questName}
-                        </Text>
-                        <Text>
-                            สถานที่ {item.location}
-                        </Text>
-                        <Text>
+                    <View style={{ borderWidth: 1, paddingLeft: 10, width: '100%' }}>
+                        <View style= {{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4}}>
+                            <Text style= {{ fontSize: 18, fontWeight: 'bold', flexDirection: 'column' }}>
+                                {item.questName}
+                            </Text>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold', flexDirection: 'column' }}>
+                                {item.timeStart} - {item.timeEnd}
+                            </Text>
+                        </View>
+
+                        <View style= {{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4}}>
+                            <Text style= {{ flexDirection: 'column' }}>
+                                สถานที่ {item.location}
+                            </Text>
+                            <Text style={{ fontSize: 11, fontWeight: 'bold', flexDirection: 'column' }}>
+                                จำนวน {item.amountTime} ชั่วโมง
+                            </Text>
+                        </View>
+                        {/* <Text>
                             จำนวนที่รับ {item.unit}
+                        </Text> */}
+                        <Text style={{ marginTop: 10 }}>
+                            วันเรื่มงาน {item.dateStart}  
                         </Text>
-                        <Text>
-                            วันเรื่มงาน {item.dateStart}
-                        </Text>
-                        <Text>
-                            วันสิ้นสุดงาน {item.dateEnd}
-                        </Text>
-                        <Text>
-                            เวลาเรื่มงาน {item.timeStart}
-                        </Text>
-                        <Text>
-                            เวลาเสร็จสิ้นงาน {item.timeEnd}
-                        </Text>
-                        <Text>
-                            จำนวนชั่วโมง {item.amountTime}
-                        </Text>
+
+                        <View style= {{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4}}>
+                            <Text style= {{ flexDirection: 'column' }}>
+                                วันสิ้นสุดงาน {item.dateEnd}
+                            </Text>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', flexDirection: 'column', color: 'purple' }}>
+                                {item.unitEnroll}/{item.unit}
+                            </Text>
+                        </View>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -83,38 +91,46 @@ const QuestScreen = () => {
     }
 
     return (
-        <View style={{ flex:1, flexDirection:'column' }}>
-            <View style={{ flex:1, backgroundColor:'#FFFFFF' }}>
-                <View style={{ flex:1, flexDirection:'row', justifyContent:'space-between' }}>
-                        <View style={{ flex:1, flexDirection:'row', justifyContent:"flex-start", backgroundColor:'white' }}>
-                            <TouchableOpacity onPress={onBackPress}>
-                                <Text>Back</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex:2, flexDirection:'row', justifyContent:"center", backgroundColor:'white' }}>
-                            <View>
-                                <Text>Quest</Text>
-                            </View>
-                        </View>
-                        <View style={{ flex:1, flexDirection:'row', justifyContent:"flex-end", backgroundColor:'white' }}>
-
+        <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#B4B4B4' }}>
+            <View style={{ flex: 1.5, backgroundColor: '#A788FF' }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-start" }}>
+                        <TouchableOpacity onPress={onBackPress}>
+                            <Text style={{ fontSize: 20, color: 'white', margin: 5 }}>ย้อนกลับ</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: "center" }}>
+                        <View>
+                            <Text style={{ fontSize: 25, color: 'white', margin: 5 }}>งานที่เปิดรับ</Text>
                         </View>
                     </View>
-            </View>
-            <View style={{ flex:15, backgroundColor:'#CCBAFF' }}>
-                <View style={{ backgroundColor:'#9773FF' }}>
-                    <Text>
-                        รายชื่องานจิตอาสาทั้งหมด
-                    </Text>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-end", backgroundColor: '#A788FF' }}>
+
+                    </View>
                 </View>
-                { quests && (
-                    <FlatList
-                        data={quests}
-                        renderItem={renderQuests}
-                        keyExtractor={(item) => item.id}
-                        removeClippedSubviews={true}
-                    />
-                )}
+            </View>
+            <View style={{ flex: 15, backgroundColor: '#CCBAFF' }}>
+                <View style={{ flex: 1, backgroundColor: '#9773FF', marginTop: 35 }}>
+                    <View style={{ margin: 10 }}>
+                        <Text style={{ fontSize: 20, color: 'white' }} >
+                            เพิ่มงาน
+                        </Text>
+                    </View>
+                </View>
+                <View style={{ flex: 13 }}>
+                    <View style={{ backgroundColor: 'white', alignItems: 'center' }}>
+                        <View style={{ marginTop: 10 }}>
+                        {quests && (
+                            <FlatList
+                                data={quests}
+                                renderItem={renderQuests}
+                                keyExtractor={(item) => item.id}
+                                removeClippedSubviews={true}
+                            />
+                        )}
+                        </View>
+                    </View>
+                </View>
             </View>
         </View>
     )

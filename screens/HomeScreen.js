@@ -13,36 +13,45 @@ const HomeScreen = () => {
     }
 
     return (
-        <View style={{ flex:1, flexDirection:'column' }}>
-            <View style={{ flex:1.5, backgroundColor:'#FFFFFF' }}>
-                <View style={{ flex:1, flexDirection:'row', justifyContent:'space-between' }}>
-                    <View style={{ flex:1, flexDirection:'row', justifyContent:"flex-start", backgroundColor:'white' }}>
-                        <TouchableOpacity>
-                            <Text>UP_Quest</Text>
-                        </TouchableOpacity>
+        <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#B4B4B4' }}>
+            <View style={{ flex: 1.5, backgroundColor: '#A788FF' }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-start", backgroundColor: '#A788FF' }}>
+
                     </View>
-                    <View style={{ flex:2, flexDirection:'row', justifyContent:"center", backgroundColor:'white' }}>
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: "center", backgroundColor: '#A788FF' }}>
                         <View>
-                            <Text>Home</Text>
+                            <Text style={{ fontSize: 25, color: 'white', margin: 5 }}>หน้าหลัก</Text>
                         </View>
                     </View>
-                    <View style={{ flex:1, flexDirection:'row', justifyContent:"flex-end", backgroundColor:'white' }}>
-                        <TouchableOpacity onPress={onProfilePress} >
-                            <Text style={{ fontSize:24 }}>Profile</Text>
-                        </TouchableOpacity>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-end", backgroundColor: '#A788FF' }}>
+
                     </View>
                 </View>
             </View>
-            <View style={{ flex:15, backgroundColor:'#CCBAFF' }}>
-                <View style={{ flex:1, backgroundColor:'gray' }}>
-
+            <View style={{ flex: 15, backgroundColor: '#B4B4B4', alignItems: 'center', marginTop: 35 }}>
+                <View style={{ width: '100%', backgroundColor: '#9773FF' }}>
+                    <View style={{ margin: 10 }}>
+                        <Text style={{ fontSize: 20, color: 'white' }} >
+                            งานจิตอาสา
+                            </Text>
+                    </View>
                 </View>
-                <View style={{ flex:4, backgroundColor:'pink' }}>
-
-                </View>
-                <View style={{ flex:3, backgroundColor:'orange' }}>
-                    <Button onPress={() => navigation.navigate('EnrollQuest')} title='เพิ่มงานจิตอาสา'/>
-                    <Button onPress={() => navigation.navigate('Quest')} title='งานจิตอาสาที่เพิ่ม'/>
+                <View style= {{ width: '100%', backgroundColor: 'white', alignItems: 'center'}}>
+                    <View style={{ width: '90%', height: '13%', margin: 20 }}>
+                        <View style={{ flex: 3 }}>
+                            <Button 
+                                color= '#636262'
+                                onPress={() => navigation.navigate('EnrollQuest')} 
+                                title='เพิ่มงานจิตอาสา' />
+                                <View style={{ marginTop: 5 }}>
+                                    <Button 
+                                        color= '#636262'
+                                        onPress={() => navigation.navigate('Quest')} 
+                                        title='งานจิตอาสาที่เพิ่ม' />
+                                </View>
+                        </View>
+                    </View>
                 </View>
             </View>
         </View>
