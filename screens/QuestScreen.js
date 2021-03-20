@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import { firebase } from './firebase/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
 const QuestScreen = () => {
 
@@ -119,16 +119,18 @@ const QuestScreen = () => {
                 </View>
                 <View style={{ flex: 13 }}>
                     <View style={{ backgroundColor: 'white', alignItems: 'center' }}>
-                        <View style={{ marginTop: 10 }}>
-                        {quests && (
-                            <FlatList
-                                data={quests}
-                                renderItem={renderQuests}
-                                keyExtractor={(item) => item.id}
-                                removeClippedSubviews={true}
-                            />
-                        )}
-                        </View>
+                        <ScrollView>
+                            <View style={{ marginTop: 10 }}>
+                            {quests && (
+                                <FlatList
+                                    data={quests}
+                                    renderItem={renderQuests}
+                                    keyExtractor={(item) => item.id}
+                                    removeClippedSubviews={true}
+                                />
+                            )}
+                            </View>
+                        </ScrollView>
                     </View>
                 </View>
             </View>

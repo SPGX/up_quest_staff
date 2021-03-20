@@ -43,13 +43,14 @@ const HomeScreen = () => {
                             <Button 
                                 color= '#636262'
                                 onPress={() => navigation.navigate('EnrollQuest')} 
-                                title='เพิ่มงานจิตอาสา' />
-                                <View style={{ marginTop: 5 }}>
-                                    <Button 
-                                        color= '#636262'
-                                        onPress={() => navigation.navigate('Quest')} 
-                                        title='งานจิตอาสาที่เพิ่ม' />
-                                </View>
+                                title='เพิ่มงานจิตอาสา' 
+                            />
+                        <View style={{ marginTop: 5 }}>
+                            <Button 
+                                color= '#636262'
+                                onPress={() => navigation.navigate('Quest')} 
+                                title='งานจิตอาสาที่เพิ่ม' />
+                        </View>
                         </View>
                     </View>
                 </View>

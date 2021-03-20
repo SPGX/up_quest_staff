@@ -193,166 +193,166 @@ const EnrollQuestScreen = () => {
                             เพิ่มงาน
                         </Text>
                     </View>
-
-                    <View style={{ width: '100%', backgroundColor: 'white', alignItems: 'center' }}>
-                        <View style={{ width: '100%', height: '13%', marginTop: '2%' }}>
-                            <View style={{ flex: 3 }}>
-                                <View style={{ flex: 1, flexDirection: 'column' }}>
-                                    <Text style={{ paddingLeft: 5 }}>
-                                        ชื่องาน
+                        <View style={{ width: '100%', backgroundColor: 'white', alignItems: 'center' }}>
+                            <View style={{ width: '100%', height: '13%', marginTop: '2%' }}>
+                                <View style={{ flex: 3 }}>
+                                    <View style={{ flex: 1, flexDirection: 'column' }}>
+                                        <Text style={{ paddingLeft: 5 }}>
+                                            ชื่องาน
                                 </Text>
-                                    <View style={{ alignItems: 'center' }}>
-                                        <TextInput
-                                            style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 1, padding: 10, width: '90%', alignItems: 'center' }}
-                                            placeholder=''
-                                            value={questName}
-                                            onChangeText={(text) => setQuestName(text)}
-                                            underlineColorAndroid="transparent"
-                                            autoCapitalize="none"
-                                        />
-                                    </View>
-                                    <View>
+                                        <View style={{ alignItems: 'center' }}>
+                                            <TextInput
+                                                style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 1, padding: 10, width: '90%', alignItems: 'center' }}
+                                                placeholder=''
+                                                value={questName}
+                                                onChangeText={(text) => setQuestName(text)}
+                                                underlineColorAndroid="transparent"
+                                                autoCapitalize="none"
+                                            />
+                                        </View>
+                                        <View>
+                                            <Text style={{ paddingLeft: 5 }}>
+                                                สถานที่
+                                    </Text>
+                                            <Picker
+                                                selectedValue={location}
+                                                style={{ height: 50, width: '100%' }}
+                                                onValueChange={(itemValue) => setLocation(itemValue)}
+                                            >
+                                                <Picker.Item label="คณะเทคโนโลยีสารสนเทศและการสื่อสาร" value="คณะเทคโนโลยีสารสนเทศและการสื่อสาร" />
+                                                <Picker.Item label="คณะพลังงานและสิ่งแวดล้อม" value="คณะพลังงานและสิ่งแวดล้อม" />
+                                                <Picker.Item label="คณะวิศวกรรมศาสตร์" value="คณะวิศวกรรมศาสตร์" />
+                                                <Picker.Item label="คณะสหเวชศาสตร์" value="คณะสหเวชศาสตร์" />
+                                                <Picker.Item label="คณะเภสัชศาสตร์" value="คณะเภสัชศาสตร์" />
+                                                <Picker.Item label="คณะสถาปัตยกรรมศาสตร์" value="คณะสถาปัตยกรรมศาสตร์" />
+                                                <Picker.Item label="คณะเกษครศาสตร์และทรัพยากรธรรมชาติ" value="คณะเกษครศาสตร์และทรัพยากรธรรมชาติ" />
+                                                <Picker.Item label="คณะแพทยศาสตร์" value="คณะแพทยศาสตร์" />
+                                                <Picker.Item label="คณะพยาบาลศาสตร์" value="คณะพยาบาลศาสตร์" />
+                                                <Picker.Item label="คณะวิทยาศาสตร์" value="คณะวิทยาศาสตร์" />
+                                                <Picker.Item label="คณะวิทยาศาสตร์การแพทย์" value="คณะวิทยาศาสตร์การแพทย์" />
+                                                <Picker.Item label="คณะศิลปศาสตร์" value="คณะศิลปศาสตร์" />
+                                                <Picker.Item label="คณะนิติศาสตร์" value="คณะนิติศาสตร์" />
+                                                <Picker.Item label="คณะวิทยาการจัดการและสารสนเทศศาสตร์" value="คณะวิทยาการจัดการและสารสนเทศศาสตร์" />
+                                                <Picker.Item label="คณะรัฐศาสตร์และสังคมศาสตร์" value="คณะรัฐศาสตร์และสังคมศาสตร์" />
+                                                <Picker.Item label="คณะทันตแพทยศาสตร์" value="คณะทันตแพทยศาสตร์" />
+                                                <Picker.Item label="วิทยาลัยการศึกษา" value="วิทยาลัยการศึกษา" />
+                                                <Picker.Item label="หอประชุมพญางำเมือง" value="หอประชุมพญางำเมือง" />
+                                                <Picker.Item label="อาคารสำนักงานอธิการบดี" value="อาคารสำนักงานอธิการบดี" />
+                                                <Picker.Item label="ศูนย์การแพทย์และโรงพยาบาล มหาวิทยาลัยพะเยา" value="ศูนย์การแพทย์และโรงพยาบาล มหาวิทยาลัยพะเยา" />
+                                                <Picker.Item label="ศูนย์บรรณาสารและการเรียนรู้" value="ศูนย์บรรณาสารและการเรียนรู้" />
+                                                <Picker.Item label="อาคาร 99 ปี พระอุบาลีคุณูปมาจารย์" value="อาคาร 99 ปี พระอุบาลีคุณูปมาจารย์" />
+                                                <Picker.Item label="ศูนย์หนังสือจุฬา" value="ศูนย์หนังสือจุฬา" />
+                                                <Picker.Item label="อาคารสงวนเสริมศรี" value="อาคารสงวนเสริมศรี" />
+                                                <Picker.Item label="สนามกีฬา" value="สนามกีฬา" />
+                                                <Picker.Item label="หอพักนิสิต (UP 1-18)" value="หอพักนิสิต (UP 1-18)" />
+                                                <Picker.Item label="โรงเรียนสาธิตมหาวิทยาลัย" value="โรงเรียนสาธิตมหาวิทยาลัย" />
+                                                <Picker.Item label="พระพุทธภุชคารักษ์" value="พระพุทธภุชคารักษ์" />
+                                            </Picker>
+                                        </View>
                                         <Text style={{ paddingLeft: 5 }}>
-                                            สถานที่
+                                            จำนวนนิสิตที่เปิดรับ
                                     </Text>
-                                        <Picker
-                                            selectedValue={location}
-                                            style={{ height: 50, width: '100%' }}
-                                            onValueChange={(itemValue) => setLocation(itemValue)}
-                                        >
-                                            <Picker.Item label="คณะเทคโนโลยีสารสนเทศและการสื่อสาร" value="คณะเทคโนโลยีสารสนเทศและการสื่อสาร" />
-                                            <Picker.Item label="คณะพลังงานและสิ่งแวดล้อม" value="คณะพลังงานและสิ่งแวดล้อม" />
-                                            <Picker.Item label="คณะวิศวกรรมศาสตร์" value="คณะวิศวกรรมศาสตร์" />
-                                            <Picker.Item label="คณะสหเวชศาสตร์" value="คณะสหเวชศาสตร์" />
-                                            <Picker.Item label="คณะเภสัชศาสตร์" value="คณะเภสัชศาสตร์" />
-                                            <Picker.Item label="คณะสถาปัตยกรรมศาสตร์" value="คณะสถาปัตยกรรมศาสตร์" />
-                                            <Picker.Item label="คณะเกษครศาสตร์และทรัพยากรธรรมชาติ" value="คณะเกษครศาสตร์และทรัพยากรธรรมชาติ" />
-                                            <Picker.Item label="คณะแพทยศาสตร์" value="คณะแพทยศาสตร์" />
-                                            <Picker.Item label="คณะพยาบาลศาสตร์" value="คณะพยาบาลศาสตร์" />
-                                            <Picker.Item label="คณะวิทยาศาสตร์" value="คณะวิทยาศาสตร์" />
-                                            <Picker.Item label="คณะวิทยาศาสตร์การแพทย์" value="คณะวิทยาศาสตร์การแพทย์" />
-                                            <Picker.Item label="คณะศิลปศาสตร์" value="คณะศิลปศาสตร์" />
-                                            <Picker.Item label="คณะนิติศาสตร์" value="คณะนิติศาสตร์" />
-                                            <Picker.Item label="คณะวิทยาการจัดการและสารสนเทศศาสตร์" value="คณะวิทยาการจัดการและสารสนเทศศาสตร์" />
-                                            <Picker.Item label="คณะรัฐศาสตร์และสังคมศาสตร์" value="คณะรัฐศาสตร์และสังคมศาสตร์" />
-                                            <Picker.Item label="คณะทันตแพทยศาสตร์" value="คณะทันตแพทยศาสตร์" />
-                                            <Picker.Item label="วิทยาลัยการศึกษา" value="วิทยาลัยการศึกษา" />
-                                            <Picker.Item label="หอประชุมพญางำเมือง" value="หอประชุมพญางำเมือง" />
-                                            <Picker.Item label="อาคารสำนักงานอธิการบดี" value="อาคารสำนักงานอธิการบดี" />
-                                            <Picker.Item label="ศูนย์การแพทย์และโรงพยาบาล มหาวิทยาลัยพะเยา" value="ศูนย์การแพทย์และโรงพยาบาล มหาวิทยาลัยพะเยา" />
-                                            <Picker.Item label="ศูนย์บรรณาสารและการเรียนรู้" value="ศูนย์บรรณาสารและการเรียนรู้" />
-                                            <Picker.Item label="อาคาร 99 ปี พระอุบาลีคุณูปมาจารย์" value="อาคาร 99 ปี พระอุบาลีคุณูปมาจารย์" />
-                                            <Picker.Item label="ศูนย์หนังสือจุฬา" value="ศูนย์หนังสือจุฬา" />
-                                            <Picker.Item label="อาคารสงวนเสริมศรี" value="อาคารสงวนเสริมศรี" />
-                                            <Picker.Item label="สนามกีฬา" value="สนามกีฬา" />
-                                            <Picker.Item label="หอพักนิสิต (UP 1-18)" value="หอพักนิสิต (UP 1-18)" />
-                                            <Picker.Item label="โรงเรียนสาธิตมหาวิทยาลัย" value="โรงเรียนสาธิตมหาวิทยาลัย" />
-                                            <Picker.Item label="พระพุทธภุชคารักษ์" value="พระพุทธภุชคารักษ์" />
-                                        </Picker>
-                                    </View>
-                                    <Text style={{ paddingLeft: 5 }}>
-                                        จำนวนนิสิตที่เปิดรับ
+                                        <View style={{ alignItems: 'center' }}>
+                                            <TextInput
+                                                style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 1, padding: 10, width: '90%', alignItems: 'center' }}
+                                                placeholder=''
+                                                value={unit}
+                                                onChangeText={(text) => setUnit(text)}
+                                                underlineColorAndroid="transparent"
+                                                keyboardType={'number-pad'}
+                                            />
+                                        </View>
+                                        <Text style={{ paddingLeft: 5 }}>
+                                            ระบุรายละเอียดของงาน สถาที่ของงานแบบเจาะจง
                                     </Text>
-                                    <View style={{ alignItems: 'center' }}>
-                                        <TextInput
-                                            style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 1, padding: 10, width: '90%', alignItems: 'center' }}
-                                            placeholder=''
-                                            value={unit}
-                                            onChangeText={(text) => setUnit(text)}
-                                            underlineColorAndroid="transparent"
-                                            keyboardType={'number-pad'}
-                                        />
-                                    </View>
-                                    <Text style={{ paddingLeft: 5 }}>
-                                        ระบุรายละเอียดของงาน สถาที่ของงานแบบเจาะจง
-                                    </Text>
-                                    <View style={{ alignItems: 'center' }}>
-                                        <TextInput
-                                            style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 1, padding: 10, width: '90%', alignItems: 'center' }}
-                                            placeholder=''
-                                            value={description}
-                                            onChangeText={(text) => setDescription(text)}
-                                            underlineColorAndroid="transparent"
-                                            autoCapitalize="none"
-                                        />
-                                    </View>
+                                        <View style={{ alignItems: 'center' }}>
+                                            <TextInput
+                                                style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 1, padding: 10, width: '90%', alignItems: 'center' }}
+                                                placeholder=''
+                                                value={description}
+                                                onChangeText={(text) => setDescription(text)}
+                                                underlineColorAndroid="transparent"
+                                                autoCapitalize="none"
+                                            />
+                                        </View>
 
-                                    <View style={{ backgroundColor: '#F3EFEF', marginTop: 20, height: '230%' }}>
-                                        <Text style={{ paddingLeft: 5 }}>
-                                            ระยะเวลางาน
+                                        <View style={{ backgroundColor: '#F3EFEF', marginTop: 20, height: '230%' }}>
+                                            <Text style={{ paddingLeft: 5 }}>
+                                                ระยะเวลางาน
                                         </Text>
-                                        <View style={{ alignItems: 'center', marginTop: 20 }}>
-                                            <View style={{ width: '90%' }}>
-                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                                    <View style={{ flex: 1 , flexDirection: 'column' }}>
-                                                        <Button 
-                                                            title="เลือกวันเริ่มงาน" 
-                                                            onPress={showTimeStartPicker} 
-                                                        />
-                                                        <DateTimePickerModal
-                                                            isVisible={isTimeStartPickerVisible}
-                                                            mode="date"
-                                                            onConfirm={handleConfirmTimeStart}
-                                                            onCancel={hideTimeStartPicker}
-                                                        />
-                                                        <Text>
-                                                            {timeStart != ''
-                                                                ? <Text>{moment(timeStart).format('ddd, MMM D YYYY')}</Text>
-                                                                : <Text></Text>
-                                                            }
-                                                        </Text>
-                                                    </View>
-                                                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                                                        <Button title="เลือกวันจบงาน" onPress={showTimeEndPicker} />
-                                                        <DateTimePickerModal
-                                                            isVisible={isTimeEndPickerVisible}
-                                                            mode="date"
-                                                            onConfirm={handleConfirmTimeEnd}
-                                                            onCancel={hideTimeEndPicker}
-                                                        />
-                                                        <Text>
-                                                            {timeEnd != ''
-                                                                ? <Text>{moment(timeEnd).format('ddd, MMM D YYYY')}</Text>
-                                                                : <Text></Text>
-                                                            }
-                                                        </Text>
+                                            <View style={{ alignItems: 'center', marginTop: 20 }}>
+                                                <View style={{ width: '90%' }}>
+                                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                        <View style={{ flex: 1, flexDirection: 'column' }}>
+                                                            <Button
+                                                                title="เลือกวันเริ่มงาน"
+                                                                onPress={showTimeStartPicker}
+                                                            />
+                                                            <DateTimePickerModal
+                                                                isVisible={isTimeStartPickerVisible}
+                                                                mode="date"
+                                                                onConfirm={handleConfirmTimeStart}
+                                                                onCancel={hideTimeStartPicker}
+                                                            />
+                                                            <Text>
+                                                                {timeStart != ''
+                                                                    ? <Text>{moment(timeStart).format('ddd, MMM D YYYY')}</Text>
+                                                                    : <Text></Text>
+                                                                }
+                                                            </Text>
+                                                        </View>
+                                                        <View style={{ flex: 1, flexDirection: 'column' }}>
+                                                            <Button title="เลือกวันจบงาน" onPress={showTimeEndPicker} />
+                                                            <DateTimePickerModal
+                                                                isVisible={isTimeEndPickerVisible}
+                                                                mode="date"
+                                                                onConfirm={handleConfirmTimeEnd}
+                                                                onCancel={hideTimeEndPicker}
+                                                            />
+                                                            <Text>
+                                                                {timeEnd != ''
+                                                                    ? <Text>{moment(timeEnd).format('ddd, MMM D YYYY')}</Text>
+                                                                    : <Text></Text>
+                                                                }
+                                                            </Text>
+                                                        </View>
                                                     </View>
                                                 </View>
                                             </View>
-                                        </View>
 
-                                        <View style={{ alignItems: 'center', marginTop: 10 }}>
-                                            <View style={{ width: '90%' }}>
-                                                <View style={{ flexDirection: 'row' }}>
-                                                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                                                        <Button title="เวลาเริ่มงาน" onPress={showTimePeriodStartPicker} />
-                                                        <DateTimePickerModal
-                                                            isVisible={isTimePeriodStartPickerVisible}
-                                                            mode="time"
-                                                            onConfirm={handleConfirmTimePeriodStart}
-                                                            onCancel={hideTimePeriodStartPicker}
-                                                        />
-                                                        <Text>
-                                                            {timePeriodStart != ''
-                                                                ? <Text>{moment(timePeriodStart).format('h:mm a')}</Text>
-                                                                : <Text></Text>
-                                                            }
-                                                        </Text>
-                                                    </View>
-                                                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                                                        <Button title="เวลาเลิกงาน" onPress={showTimePeriodEndPicker} />
-                                                        <DateTimePickerModal
-                                                            isVisible={isTimePeriodEndPickerVisible}
-                                                            mode="time"
-                                                            onConfirm={handleConfirmTimePeriodEnd}
-                                                            onCancel={hideTimePeriodEndPicker}
-                                                        />
-                                                        <Text>
-                                                            {timePeriodEnd != ''
-                                                                ? <Text>{moment(timePeriodEnd).format('h:mm a')}</Text>
-                                                                : <Text></Text>
-                                                            }
-                                                        </Text>
+                                            <View style={{ alignItems: 'center', marginTop: 10 }}>
+                                                <View style={{ width: '90%' }}>
+                                                    <View style={{ flexDirection: 'row' }}>
+                                                        <View style={{ flex: 1, flexDirection: 'column' }}>
+                                                            <Button title="เวลาเริ่มงาน" onPress={showTimePeriodStartPicker} />
+                                                            <DateTimePickerModal
+                                                                isVisible={isTimePeriodStartPickerVisible}
+                                                                mode="time"
+                                                                onConfirm={handleConfirmTimePeriodStart}
+                                                                onCancel={hideTimePeriodStartPicker}
+                                                            />
+                                                            <Text>
+                                                                {timePeriodStart != ''
+                                                                    ? <Text>{moment(timePeriodStart).format('h:mm a')}</Text>
+                                                                    : <Text></Text>
+                                                                }
+                                                            </Text>
+                                                        </View>
+                                                        <View style={{ flex: 1, flexDirection: 'column' }}>
+                                                            <Button title="เวลาเลิกงาน" onPress={showTimePeriodEndPicker} />
+                                                            <DateTimePickerModal
+                                                                isVisible={isTimePeriodEndPickerVisible}
+                                                                mode="time"
+                                                                onConfirm={handleConfirmTimePeriodEnd}
+                                                                onCancel={hideTimePeriodEndPicker}
+                                                            />
+                                                            <Text>
+                                                                {timePeriodEnd != ''
+                                                                    ? <Text>{moment(timePeriodEnd).format('h:mm a')}</Text>
+                                                                    : <Text></Text>
+                                                                }
+                                                            </Text>
+                                                        </View>
                                                     </View>
                                                 </View>
                                             </View>
@@ -360,11 +360,10 @@ const EnrollQuestScreen = () => {
                                     </View>
                                 </View>
                             </View>
+                            <View style={{ marginTop: '100%', width: '90%' }}>
+                                <Button title='บันทึกข้อมูล' onPress={onAddPress} />
+                            </View>
                         </View>
-                        <View style={{ marginTop: '100%', width: '90%' }}>
-                            <Button title='บันทึกข้อมูล' onPress={onAddPress} />
-                        </View>
-                    </View>
                 </View>
             </View>
         </View>

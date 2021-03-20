@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import { firebase } from './firebase/config';
 import auth from 'firebase/auth';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 
 const QuestDetailScreen = ({ route }) => {
 
@@ -62,7 +62,7 @@ const QuestDetailScreen = ({ route }) => {
 
     const renderQuests = ({ item }) => {
         return (
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', backgroundColor: 'white', padding: 10, marginTop: 5, borderRadius: 10 }}>
                 <View style={{ flex: 5 }}>
                     <Text>
                         {item.studentEnrollId}
@@ -70,95 +70,117 @@ const QuestDetailScreen = ({ route }) => {
                     <Text>
                         {item.status}
                     </Text>
-                    {/* <Text>
-                        {item.firstName}
+                    <Text>
+                        {item.status}
                     </Text>
                     <Text>
-                        {item.lastName}
+                        {item.status}
                     </Text>
                     <Text>
-                        {item.studentNumber}
+                        {item.status}
                     </Text>
-                    <Text>
-                        {item.department}
-                    </Text>
-                    <Text>
-                        {item.phoneNumber}
-                    </Text> */}
+                </View>
+                <View style={{ flex: 1, marginRight: 5 }}>
+                    <Button 
+                        color= 'green'
+                        title='Pass' 
+                        onPress={() => passQuest({ item })} 
+                    />
                 </View>
                 <View style={{ flex: 1 }}>
-                    <Button title='Pass' onPress={() => passQuest({ item })} />
-                </View>
-                <View style={{ flex: 1 }}>
-                    <Button title='Fail' onPress={() => failQuest({ item })} />
+                    <Button    
+                        color= 'red'
+                        title='Fail' 
+                        onPress={() => failQuest({ item })} 
+                    />
                 </View>
             </View>
         )
     }
     return (
-        <View style={{ flex: 1, flexDirection: 'column' }}>
-            <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-start", backgroundColor: 'white' }}>
+        <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#B4B4B4' }}>
+            <View style={{ flex: 1.5, backgroundColor: '#A788FF' }}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-start" }}>
                         <TouchableOpacity onPress={onBackPress}>
-                            <Text>Back</Text>
+                            <Text style={{ fontSize: 20, color: 'white', margin: 5 }}>ย้อนกลับ</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: "center", backgroundColor: 'white' }}>
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: "center" }}>
                         <View>
-                            <Text>Quest Detail</Text>
+                            <Text style={{ fontSize: 25, color: 'white', margin: 5 }}>หน้าหลัก</Text>
                         </View>
                     </View>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-end", backgroundColor: 'white' }}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-end", backgroundColor: '#A788FF' }}>
 
                     </View>
                 </View>
             </View>
-            <View style={{ flex: 10 }}>
-                <View style={{ flex: 1, borderWidth: 1, paddingLeft: 10, width: '100%' }}>
-                    <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4 }}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold', flexDirection: 'column' }}>
-                            {questId.questName}
-                        </Text>
-                        <Text style={{ fontSize: 12, fontWeight: 'bold', flexDirection: 'column' }}>
-                            {questId.timeStart} - {questId.timeEnd}
-                        </Text>
-                    </View>
 
-                    <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4 }}>
-                        <Text style={{ flexDirection: 'column' }}>
-                            สถานที่ {questId.location}
-                        </Text>
-                        <Text style={{ fontSize: 11, fontWeight: 'bold', flexDirection: 'column' }}>
-                            จำนวน {questId.amountTime} ชั่วโมง
-                            </Text>
-                    </View>
-                    {/* <Text>
-                            จำนวนที่รับ {item.unit}
-                        </Text> */}
-                    <Text style={{ marginTop: 10 }}>
-                        วันเรื่มงาน {questId.dateStart}
+                <View style={{ flex: 1.2, backgroundColor: '#9773FF', marginTop: 35, justifyContent: "center" }}>
+                    <Text style={{ fontSize: 20, color: 'white', paddingLeft: 5 }} >
+                        ชื่องาน
                     </Text>
+                </View>
 
-                    <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4 }}>
-                        <Text style={{ flexDirection: 'column' }}>
-                            วันสิ้นสุดงาน {questId.dateEnd}
+            <View style={{ flex: 16 }}>
+                <View style={{ flex: 0.5, alignItems: 'center' }}>
+                    <View style={{ flex: 1, paddingLeft: 10, width: '100%', backgroundColor: 'white' }}>
+                        <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4 }}>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold', flexDirection: 'column' }}>
+                                {questId.questName}
+                            </Text>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold', flexDirection: 'column' }}>
+                                {questId.timeStart} - {questId.timeEnd}
+                            </Text>
+                        </View>
+
+                        <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4 }}>
+                            <Text style={{ flexDirection: 'column' }}>
+                                สถานที่ {questId.location}
+                            </Text>
+                            <Text style={{ fontSize: 11, fontWeight: 'bold', flexDirection: 'column' }}>
+                                จำนวน {questId.amountTime} ชั่วโมง
+                                </Text>
+                        </View>
+                        {/* <Text>
+                                จำนวนที่รับ {item.unit}
+                            </Text> */}
+                        <Text style={{ marginTop: 10 }}>
+                            วันเริ่มงาน {questId.dateStart}
                         </Text>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold', flexDirection: 'column', color: 'purple' }}>
-                            {questId.unitEnroll}/{questId.unit}
-                        </Text>
+
+                        <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4 }}>
+                            <Text style={{ flexDirection: 'column' }}>
+                                วันสิ้นสุดงาน {questId.dateEnd}
+                            </Text>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', flexDirection: 'column', color: 'purple' }}>
+                                {questId.unitEnroll}/{questId.unit}
+                            </Text>
+                        </View>
                     </View>
                 </View>
 
                 <View style={{ flex: 1 }}>
-                    {quests && (
-                        <FlatList
-                            data={quests}
-                            renderItem={renderQuests}
-                            keyExtractor={(item) => item.id}
-                            removeClippedSubviews={true}
-                        />
-                    )}
+                    <View style={{ backgroundColor: '#9773FF', marginTop: 35, justifyContent: "center", height: 55 }}>
+                        <Text style={{ fontSize: 20, color: 'white', paddingLeft: 5 }} >
+                            รายชื่อนิสิต
+                        </Text>
+                    </View>
+                    <ScrollView>
+                        <View style={{ padding: 5 }}>
+                            <View style={{ margin: 3 }}>
+                                {quests && (
+                                    <FlatList
+                                        data={quests}
+                                        renderItem={renderQuests}
+                                        keyExtractor={(item) => item.id}
+                                        removeClippedSubviews={true}
+                                    />
+                                )}
+                            </View>
+                        </View>
+                    </ScrollView>
                 </View>
             </View>
         </View>
