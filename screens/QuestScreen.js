@@ -47,11 +47,11 @@ const QuestScreen = () => {
 
     const renderQuests = ({ item }) => {
         return (
-            <View style={{ width: 335, height: 130 }}>
+            <View style={{ width: '100%', height: 130 }}>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('QuestDetail', { id: item })}
                 >
-                    <View style={{ borderWidth: 1, paddingLeft: 10, width: '100%' }}>
+                    <View style={{ borderWidth: 0.6, paddingLeft: 10, width: '100%' }}>
                         <View style= {{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4}}>
                             <Text style= {{ fontSize: 18, fontWeight: 'bold', flexDirection: 'column' }}>
                                 {item.questName}

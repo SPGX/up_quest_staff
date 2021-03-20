@@ -202,7 +202,7 @@ const EnrollQuestScreen = () => {
                                 </Text>
                                         <View style={{ alignItems: 'center' }}>
                                             <TextInput
-                                                style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 1, padding: 10, width: '90%', alignItems: 'center' }}
+                                                style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 0.5, padding: 10, width: '90%', alignItems: 'center' }}
                                                 placeholder=''
                                                 value={questName}
                                                 onChangeText={(text) => setQuestName(text)}
@@ -211,7 +211,7 @@ const EnrollQuestScreen = () => {
                                             />
                                         </View>
                                         <View>
-                                            <Text style={{ paddingLeft: 5 }}>
+                                            <Text style={{ paddingLeft: 5, marginTop: 5 }}>
                                                 สถานที่
                                     </Text>
                                             <Picker
@@ -249,12 +249,12 @@ const EnrollQuestScreen = () => {
                                                 <Picker.Item label="พระพุทธภุชคารักษ์" value="พระพุทธภุชคารักษ์" />
                                             </Picker>
                                         </View>
-                                        <Text style={{ paddingLeft: 5 }}>
+                                        <Text style={{ paddingLeft: 5, marginTop: 5 }}>
                                             จำนวนนิสิตที่เปิดรับ
                                     </Text>
                                         <View style={{ alignItems: 'center' }}>
                                             <TextInput
-                                                style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 1, padding: 10, width: '90%', alignItems: 'center' }}
+                                                style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 0.5, padding: 10, width: '90%', alignItems: 'center' }}
                                                 placeholder=''
                                                 value={unit}
                                                 onChangeText={(text) => setUnit(text)}
@@ -262,12 +262,12 @@ const EnrollQuestScreen = () => {
                                                 keyboardType={'number-pad'}
                                             />
                                         </View>
-                                        <Text style={{ paddingLeft: 5 }}>
+                                        <Text style={{ paddingLeft: 5, marginTop: 5 }}>
                                             ระบุรายละเอียดของงาน สถาที่ของงานแบบเจาะจง
                                     </Text>
                                         <View style={{ alignItems: 'center' }}>
                                             <TextInput
-                                                style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 1, padding: 10, width: '90%', alignItems: 'center' }}
+                                                style={{ backgroundColor: 'white', marginTop: 10, height: 35, borderWidth: 0.5, padding: 10, width: '90%', alignItems: 'center' }}
                                                 placeholder=''
                                                 value={description}
                                                 onChangeText={(text) => setDescription(text)}
@@ -277,7 +277,7 @@ const EnrollQuestScreen = () => {
                                         </View>
 
                                         <View style={{ backgroundColor: '#F3EFEF', marginTop: 20, height: '230%' }}>
-                                            <Text style={{ paddingLeft: 5 }}>
+                                            <Text style={{ paddingLeft: 5, marginTop: 5 }}>
                                                 ระยะเวลางาน
                                         </Text>
                                             <View style={{ alignItems: 'center', marginTop: 20 }}>
@@ -285,6 +285,7 @@ const EnrollQuestScreen = () => {
                                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                                                         <View style={{ flex: 1, flexDirection: 'column' }}>
                                                             <Button
+                                                                color= '#AA67FF'
                                                                 title="เลือกวันเริ่มงาน"
                                                                 onPress={showTimeStartPicker}
                                                             />
@@ -302,7 +303,11 @@ const EnrollQuestScreen = () => {
                                                             </Text>
                                                         </View>
                                                         <View style={{ flex: 1, flexDirection: 'column' }}>
-                                                            <Button title="เลือกวันจบงาน" onPress={showTimeEndPicker} />
+                                                            <Button 
+                                                                color= '#AA67FF'
+                                                                title="เลือกวันจบงาน" 
+                                                                onPress={showTimeEndPicker} 
+                                                            />
                                                             <DateTimePickerModal
                                                                 isVisible={isTimeEndPickerVisible}
                                                                 mode="date"
@@ -324,7 +329,11 @@ const EnrollQuestScreen = () => {
                                                 <View style={{ width: '90%' }}>
                                                     <View style={{ flexDirection: 'row' }}>
                                                         <View style={{ flex: 1, flexDirection: 'column' }}>
-                                                            <Button title="เวลาเริ่มงาน" onPress={showTimePeriodStartPicker} />
+                                                            <Button 
+                                                                color= '#AA67FF'
+                                                                title="เวลาเริ่มงาน" 
+                                                                onPress={showTimePeriodStartPicker} 
+                                                            />
                                                             <DateTimePickerModal
                                                                 isVisible={isTimePeriodStartPickerVisible}
                                                                 mode="time"
@@ -339,7 +348,11 @@ const EnrollQuestScreen = () => {
                                                             </Text>
                                                         </View>
                                                         <View style={{ flex: 1, flexDirection: 'column' }}>
-                                                            <Button title="เวลาเลิกงาน" onPress={showTimePeriodEndPicker} />
+                                                            <Button 
+                                                                color= '#AA67FF'
+                                                                title="เวลาเลิกงาน" 
+                                                                onPress={showTimePeriodEndPicker} 
+                                                            />
                                                             <DateTimePickerModal
                                                                 isVisible={isTimePeriodEndPickerVisible}
                                                                 mode="time"
@@ -360,8 +373,11 @@ const EnrollQuestScreen = () => {
                                     </View>
                                 </View>
                             </View>
-                            <View style={{ marginTop: '100%', width: '90%' }}>
-                                <Button title='บันทึกข้อมูล' onPress={onAddPress} />
+                            <View style={{ marginTop: '100%', width: '90%', height: '90%' }}>
+                                <Button 
+                                    color= '#9773FF'
+                                    title='บันทึกข้อมูล' 
+                                    onPress={onAddPress} />
                             </View>
                         </View>
                 </View>
