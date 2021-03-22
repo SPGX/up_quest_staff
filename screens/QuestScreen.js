@@ -47,7 +47,7 @@ const QuestScreen = () => {
 
     const renderQuests = ({ item }) => {
         return (
-            <View style={{ width: '100%', height: 130 }}>
+            <View style={{ width: 370, height: 120 }}>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('QuestDetail', { id: item })}
                 >
@@ -73,7 +73,7 @@ const QuestScreen = () => {
                             จำนวนที่รับ {item.unit}
                         </Text> */}
                         <Text style={{ marginTop: 10 }}>
-                            วันเรื่มงาน {item.dateStart}  
+                            วันเริ่มงาน {item.dateStart}  
                         </Text>
 
                         <View style= {{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', paddingRight: 4}}>
@@ -101,7 +101,9 @@ const QuestScreen = () => {
                     </View>
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: "center" }}>
                         <View>
-                            <Text style={{ fontSize: 25, color: 'white', margin: 5 }}>งานที่เปิดรับ</Text>
+                            <Text style={{ fontSize: 25, color: 'white', margin: 5 }}>
+                                งานที่เปิดรับ
+                            </Text>
                         </View>
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-end", backgroundColor: '#A788FF' }}>
